@@ -6,6 +6,7 @@ import com.onus.crud_project_review2.entities.Employees;
 import com.onus.crud_project_review2.mapper.EmployeeMapper;
 import com.onus.crud_project_review2.repositories.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +19,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponseDTO createEmployee(EmployeeDTO employeeDTO) {
-        return null;
+        if(employeeRepository.existsByEmail(employeeDTO.getEmail())){
+            throw new RuntimeException("Email already exists");
+        }
+
+        Employees employees = EmployeeMapper.mapToEmployee(employeeDTO);
+        employeeRepository.save(employees);
+
+        return EmployeeMapper.mapToEmployeeResponseDTO(employees);
     }
 
     @Override
     public EmployeeResponseDTO getEmployeeById(String employeeId) {
-        return null;
+        Employees employees = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        return EmployeeMapper.mapToEmployeeResponseDTO(employees);
     }
 
     @Override
@@ -36,11 +46,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployeeById(String employeeId) {
-
+        Employees employees = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        employeeRepository.delete(employees);
     }
 
     @Override
     public EmployeeResponseDTO updateEmployee(String employeeId, EmployeeDTO employeeDTO) {
-        return null;
+        Employees employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        if(!employee.getEmail().equals(employeeDTO.getEmail()) && employeeRepository.existsByEmail(employeeDTO.getEmail())){
+            throw new RuntimeException("Email already exists");
+        }
+
+        employee.setEmail(employeeDTO.getEmail());
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
+        employee.setDepartment(employeeDTO.getDepartment());
+        Employees updatedEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.mapToEmployeeResponseDTO(updatedEmployee);
     }
 }

@@ -1,7 +1,7 @@
 package com.onus.crud_project_review2.services;
 
-import com.onus.crud_project_review2.dtos.EmployeeDTO;
-import com.onus.crud_project_review2.dtos.EmployeeResponseDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeResponseDTO;
 import com.onus.crud_project_review2.dtos.PageResponseDTO;
 
 import java.util.List;

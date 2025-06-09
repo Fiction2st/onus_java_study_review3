@@ -1,10 +1,11 @@
-package com.onus.crud_project_review2.services;
+package com.onus.crud_project_review2.services.impl;
 
-import com.onus.crud_project_review2.dtos.EmployeeInfoDTO;
-import com.onus.crud_project_review2.dtos.EmployeeInfoResponseDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoResponseDTO;
 import com.onus.crud_project_review2.entities.EmployeeInfo;
 import com.onus.crud_project_review2.mapper.EmployeeInfoMapper;
 import com.onus.crud_project_review2.repositories.EmployeeInfoRepository;
+import com.onus.crud_project_review2.services.EmployeeInfoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

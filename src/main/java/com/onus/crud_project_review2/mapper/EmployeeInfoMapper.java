@@ -1,10 +1,8 @@
 package com.onus.crud_project_review2.mapper;
 
-import com.onus.crud_project_review2.dtos.EmployeeDTO;
-import com.onus.crud_project_review2.dtos.EmployeeInfoDTO;
-import com.onus.crud_project_review2.dtos.EmployeeInfoResponseDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoResponseDTO;
 import com.onus.crud_project_review2.entities.EmployeeInfo;
-import com.onus.crud_project_review2.entities.Employees;
 
 public class EmployeeInfoMapper {
     public static EmployeeInfo mapToEmployeeInfo(EmployeeInfoDTO employeeInfoDTO){

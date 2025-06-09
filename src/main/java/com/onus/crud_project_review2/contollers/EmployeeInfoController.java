@@ -1,8 +1,7 @@
 package com.onus.crud_project_review2.contollers;
 
-import com.onus.crud_project_review2.dtos.EmployeeInfoDTO;
-import com.onus.crud_project_review2.dtos.EmployeeInfoResponseDTO;
-import com.onus.crud_project_review2.dtos.EmployeeResponseDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoResponseDTO;
 import com.onus.crud_project_review2.services.EmployeeInfoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

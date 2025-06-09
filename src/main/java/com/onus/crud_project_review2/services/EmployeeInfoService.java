@@ -1,8 +1,7 @@
 package com.onus.crud_project_review2.services;
 
-import com.onus.crud_project_review2.dtos.EmployeeInfoDTO;
-import com.onus.crud_project_review2.dtos.EmployeeInfoResponseDTO;
-import org.springframework.stereotype.Service;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoDTO;
+import com.onus.crud_project_review2.dtos.employee.EmployeeInfoResponseDTO;
 
 import java.util.List;
 

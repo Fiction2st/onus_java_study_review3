@@ -1,8 +1,11 @@
 package com.onus.crud_project_review2.contollers;
 
 import com.onus.crud_project_review2.dtos.ApiResponseDTO;
+import com.onus.crud_project_review2.dtos.EmailDTO;
+import com.onus.crud_project_review2.dtos.EmailVerifyRequestDTO;
 import com.onus.crud_project_review2.dtos.user.UserDTO;
 import com.onus.crud_project_review2.dtos.user.UserResponseDTO;
+import com.onus.crud_project_review2.services.AuthService;
 import com.onus.crud_project_review2.services.EmailService;
 import com.onus.crud_project_review2.services.UserService;
 import jakarta.validation.Valid;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final UserService userService;
     private final EmailService emailService;
+    private final AuthService authService;
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponseDTO<UserResponseDTO>> signUpUser(@Valid @RequestBody UserDTO userDTO) {
@@ -37,4 +41,36 @@ public class AuthController {
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @PostMapping("/send/email")
+    public ResponseEntity<ApiResponseDTO<Boolean>> sendEmail(
+            @Valid
+            @RequestBody EmailDTO emailDTO){
+        authService.sendVerificationCode(emailDTO);
+
+        ApiResponseDTO<Boolean> response = ApiResponseDTO.<Boolean>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("메일발송성공")
+                .data(true)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/verify/email")
+    public ResponseEntity<ApiResponseDTO<Boolean>> verifyEmail(
+            @Valid
+            @RequestBody EmailVerifyRequestDTO emailVerifyRequestDTO){
+
+        Boolean verified = authService.verifyEmailCode(emailVerifyRequestDTO);
+
+        ApiResponseDTO<Boolean> response = ApiResponseDTO.<Boolean>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("메일 인증 성공")
+                .data(verified)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
 }
